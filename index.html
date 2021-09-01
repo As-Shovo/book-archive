@@ -16,11 +16,9 @@
     <!-- Header  -->
     <header>
         <!-- navbar -->
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#"><b>OPEN</b>Libary</a>
-            </div>
-        </nav>
+        <div class="bg-dark p-3 w-100 ">
+            <p class="text-white text-center fs-1"><b>Open Libray</b></p>
+        </div>
     </header>
 
     <!-- main  -->
@@ -34,6 +32,14 @@
                     placeholder="Input Your Favorite Book Name" aria-label="Favorite Book Name">
                 <button class="btn btn-outline-success " type="button" id="button-search">Search</button>
             </div>
+
+            <!-- loder or Spiner  -->
+            <div class="d-flex justify-content-center mt-5">
+                <div id="spinner" class="spinner-border text-success mx-auto d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div> 
+            </div>
+            
 
             <!-- Display Result Number -->
             <div id="show-result-number"></div>
@@ -51,7 +57,7 @@
 
 
 
-            <!-- <button onclick="moreinformation('')"></button> -->
+            <!-- <button ></button> -->
 
 
         </section>

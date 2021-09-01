@@ -3,6 +3,7 @@ const inputField = document.getElementById('input-field');
 const searchButton = document.getElementById('button-search');
 const booksItems = document.getElementById('books-items');
 const showResultNumber = document.getElementById('show-result-number');
+const errorMessageDiv = document.getElementById("error-message");
 
 // click Event Button Search
 
@@ -17,6 +18,13 @@ searchButton.addEventListener('click', () => {
     // Clear show rsult 
     showResultNumber.innerHTML = '';
 
+    // clear error message 
+    errorMessageDiv.textContent = '';
+
+
+    //Spinner on 
+    document.getElementById("spinner").classList.remove("d-none");
+
     // Function of Data Load 
     const libaryLoad = () => {
         fetch(url)
@@ -25,8 +33,7 @@ searchButton.addEventListener('click', () => {
 
     }
     libaryLoad();
-    // clear input field
-    inputField.value = '';
+
 
 
 
@@ -39,12 +46,17 @@ searchButton.addEventListener('click', () => {
         // showResultNumber.innerHTML= '';
 
 
+        
         if (libaryDatas.numFound === 0) {
-            
+            document.getElementById("spinner").classList.add("d-none");
             return errorMessage();
         };
+        // clear input field
+        inputField.value = '';
 
-        console.log(libaryDatas.numFound);
+        document.getElementById("spinner").classList.add("d-none");
+
+        console.log(libaryDatas.docs.length);
         const libaryBooks = libaryDatas.docs;
 
         showResultNumber.innerHTML = `
@@ -67,10 +79,10 @@ searchButton.addEventListener('click', () => {
                     <img src="https://covers.openlibrary.org/b/id/${libarybook.cover_i}-M.jpg" class="card-img-top img-fluid" />
                     <div class="card-footer text-center">
                         <h6 class="card-title">Book Title : ${libarybook.title}</h6>
-                        <p><b>Author Name :</b> ${libarybook.author_name} </p>
-                        <p><b>Published Date :</b> ${libarybook.publish_date} </p>
+                        <p><b>Author Name :</b> ${libarybook.author_name ? libarybook.author_name : ''} </p>
+                        <p><b>Published Date :</b> ${libarybook.publish_date ? libarybook.publish_date : ''} </p>
                     </div>
-                    <button class='btn btn-success btn-sm mt-2'>More</button>
+                    
                 </div>
 
                 </div>
@@ -79,6 +91,7 @@ searchButton.addEventListener('click', () => {
                 booksItems.appendChild(div);
             }
             // console.log('error');
+            
 
 
 
@@ -88,22 +101,24 @@ searchButton.addEventListener('click', () => {
 })
 
 const errorMessage = () => {
-    const errorMessageDiv = document.getElementById("error-message");
-    // document.getElementById("p").innerHTML = "";
-    const valueInput = document.getElementById('input-field');
-    console.log(valueInput.value);
-        
+    
+    // // document.getElementById("p").innerHTML = "";
+    // const valueInput = document.getElementById('input-field');
+    // console.log(valueInput.value);
 
 
-    errorMessageDiv.innerHTML = ` <div class="card m-auto p-5 mt-5 bg-warning" style="width: 18rem">
+
+    errorMessageDiv.innerHTML = ` 
+        <div class="card m-auto p-4 mt-5 bg-warning" style="width: 22rem">
           <h5 class="card-title">Dear Sir/Ma'am,</h5>
           <p class="card-text">
-            Your search <b class="text-danger">-- ${valueInput.value} --</b> did not match Book Name. Please enter a
+            Your search <b class="text-danger">${inputField.value}</b> did not match Book Name. <b class='bg-danger'>No Result Found</b> Please enter a
             correct name.
           </p>
-        </div>`;
+        </div>
+        `;
+        inputField.value = '';
 
-        // showResultNumber.innerText ='';
+    // showResultNumber.innerText ='';
 }
 
-// errorMessage();
