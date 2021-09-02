@@ -1,31 +1,32 @@
-// Global Variable 
+//--------------------------------------------  Global Variable  -----------------------------
+
 const inputField = document.getElementById('input-field');
 const searchButton = document.getElementById('button-search');
 const booksItems = document.getElementById('books-items');
 const showResultNumber = document.getElementById('show-result-number');
 const errorMessageDiv = document.getElementById("error-message");
 
-// click Event Button Search
+//-------------------------------------- click Event Button Search ----------------------------
 
 searchButton.addEventListener('click', () => {
     const inputFieldValue = inputField.value;
     const url = `https://openlibrary.org/search.json?q=${inputFieldValue}`;
     // const url = ` https://openlibrary.org/search.json?q=javascript`;
 
-    //clear books Items Field
+    //clear books Items Field ---------------------
     booksItems.textContent = '';
 
-    // Clear show rsult 
+    // Clear show rsult -----------------------
     showResultNumber.innerHTML = '';
 
-    // clear error message 
+    // clear error message ---------------------
     errorMessageDiv.textContent = '';
 
 
-    //Spinner on 
+    //Spinner on -------------------------------
     document.getElementById("spinner").classList.remove("d-none");
 
-    // Function of Data Load 
+    //------------------------------------  Function of Data Load  --------------------------
     const libaryLoad = () => {
         fetch(url)
             .then(res => res.json())
@@ -37,7 +38,7 @@ searchButton.addEventListener('click', () => {
 
 
 
-    // Function of Data Display 
+    //----------------------------  Function of Data Display  ------------------------------- 
     const displayLibaryData = libaryDatas => {
         //clear books Items Field
         // booksItems.textContent = '';
@@ -48,31 +49,40 @@ searchButton.addEventListener('click', () => {
         // console.log(libaryDatas);
 
 
+        // ------------------ Error Handle -------------------------------------------------
+
         if (libaryDatas.numFound === 0) {
+
+            //spinner -----------------------------
             document.getElementById("spinner").classList.add("d-none");
             return errorMessage();
         };
-        // clear input field
+        // clear input field-----------------------
         inputField.value = '';
 
-        //spinner 
+        //spinner ------------------------
         document.getElementById("spinner").classList.add("d-none");
 
         // console.log(libaryDatas.docs.length);
         const libaryBooks = libaryDatas.docs;
 
+
+        //------------------------- Show Search Result --------------------------------
         showResultNumber.innerHTML = `
         
-            <div class="card m-auto p-3 mt-3 bg-success" style="width: 35rem">
-                <h5 class="card-title text-center">Dear Sir/Ma'am, Your Result Number is <b class="text-warning">-- ${libaryBooks.length} --</b></h5>
+            <div class="card m-auto p-3 mt-3 bg-success" style="width: 38rem">
+                <h5 class="card-title text-center">Dear Sir/Ma'am, Your Result Number Of Book is <b class="text-warning">-- ${libaryDatas.numFound} --</b></h5>
             </div>
         
         `;
 
 
+        //-----------------------------  ForEach Loop For libaryBooks element  ---------------------------
 
         libaryBooks.forEach(libarybook => {
             // console.log(libarybook.cover_i);
+
+            //--------------------------------  if Image == true // ---------------------
 
             if (libarybook.cover_i) {
                 const div = document.createElement('div');
@@ -105,13 +115,14 @@ searchButton.addEventListener('click', () => {
     }
 })
 
+//---------------------------------------------  Error message Function -----------------------
 const errorMessage = () => {
 
     // // document.getElementById("p").innerHTML = "";
     // const valueInput = document.getElementById('input-field');
     // console.log(valueInput.value);
 
-
+    // ------------------------ Error Message Body ----------------------------
 
     errorMessageDiv.innerHTML = ` 
         <div class="card m-auto p-4 mt-4 bg-warning" style="width: 22rem">
