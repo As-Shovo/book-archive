@@ -45,7 +45,7 @@ searchButton.addEventListener('click', () => {
         // // Clear show rsult 
         // showResultNumber.innerHTML= '';
 
-        console.log(libaryDatas);
+        // console.log(libaryDatas);
 
 
         if (libaryDatas.numFound === 0) {
@@ -58,7 +58,7 @@ searchButton.addEventListener('click', () => {
         //spinner 
         document.getElementById("spinner").classList.add("d-none");
 
-        console.log(libaryDatas.docs.length);
+        // console.log(libaryDatas.docs.length);
         const libaryBooks = libaryDatas.docs;
 
         showResultNumber.innerHTML = `
@@ -114,7 +114,7 @@ const errorMessage = () => {
 
 
     errorMessageDiv.innerHTML = ` 
-        <div class="card m-auto p-4 mt-5 bg-warning" style="width: 22rem">
+        <div class="card m-auto p-4 mt-4 bg-warning" style="width: 22rem">
           <h5 class="card-title">Dear Sir/Ma'am,</h5>
           <p class="card-text">
             Your search <b class="text-danger">${inputField.value}</b> did not match Book Name. <b class='text-danger'>No Result Found</b> Please enter a
