@@ -93,9 +93,9 @@ searchButton.addEventListener('click', () => {
                     <img src="https://covers.openlibrary.org/b/id/${libarybook.cover_i}-M.jpg" class="card-img-top img-fluid" />
                     <div class="card-footer text-center">
                         <h6 class="card-title"><b>Book Title :</b> ${libarybook.title}</h6>
-                        <p><b>Author Name :</b> ${libarybook.author_name ? libarybook.author_name : ''} </p>
+                        <p><b>Author Name :</b> ${libarybook.author_name ? libarybook.author_name[0] : ''} </p>
                         <p><b>First Published Date :</b> ${libarybook.first_publish_year ? libarybook.first_publish_year : ''} </p>
-                        <p><b>Publisher :</b> ${libarybook.publisher ? libarybook.publisher : ''} </p>
+                        <p><b>Publisher :</b> ${libarybook.publisher ? libarybook.publisher[0] : ''} </p>
                     </div>
                     
                 </div>
