@@ -45,8 +45,9 @@ searchButton.addEventListener('click', () => {
         // // Clear show rsult 
         // showResultNumber.innerHTML= '';
 
+        console.log(libaryDatas);
 
-        
+
         if (libaryDatas.numFound === 0) {
             document.getElementById("spinner").classList.add("d-none");
             return errorMessage();
@@ -54,15 +55,18 @@ searchButton.addEventListener('click', () => {
         // clear input field
         inputField.value = '';
 
+        //spinner 
         document.getElementById("spinner").classList.add("d-none");
 
         console.log(libaryDatas.docs.length);
         const libaryBooks = libaryDatas.docs;
 
         showResultNumber.innerHTML = `
+        
             <div class="card m-auto p-3 mt-3 bg-success" style="width: 35rem">
                 <h5 class="card-title text-center">Dear Sir/Ma'am, Your Result Number is <b class="text-warning">-- ${libaryBooks.length} --</b></h5>
             </div>
+        
         `;
 
 
@@ -80,7 +84,8 @@ searchButton.addEventListener('click', () => {
                     <div class="card-footer text-center">
                         <h6 class="card-title">Book Title : ${libarybook.title}</h6>
                         <p><b>Author Name :</b> ${libarybook.author_name ? libarybook.author_name : ''} </p>
-                        <p><b>Published Date :</b> ${libarybook.publish_date ? libarybook.publish_date : ''} </p>
+                        <p><b>First Published Date :</b> ${libarybook.first_publish_year ? libarybook.first_publish_year : ''} </p>
+                        <p><b>Publisher :</b> ${libarybook.publisher ? libarybook.publisher : ''} </p>
                     </div>
                     
                 </div>
@@ -91,7 +96,7 @@ searchButton.addEventListener('click', () => {
                 booksItems.appendChild(div);
             }
             // console.log('error');
-            
+
 
 
 
@@ -101,7 +106,7 @@ searchButton.addEventListener('click', () => {
 })
 
 const errorMessage = () => {
-    
+
     // // document.getElementById("p").innerHTML = "";
     // const valueInput = document.getElementById('input-field');
     // console.log(valueInput.value);
@@ -112,12 +117,12 @@ const errorMessage = () => {
         <div class="card m-auto p-4 mt-5 bg-warning" style="width: 22rem">
           <h5 class="card-title">Dear Sir/Ma'am,</h5>
           <p class="card-text">
-            Your search <b class="text-danger">${inputField.value}</b> did not match Book Name. <b class='bg-danger'>No Result Found</b> Please enter a
+            Your search <b class="text-danger">${inputField.value}</b> did not match Book Name. <b class='text-danger'>No Result Found</b> Please enter a
             correct name.
           </p>
         </div>
         `;
-        inputField.value = '';
+    inputField.value = '';
 
     // showResultNumber.innerText ='';
 }
