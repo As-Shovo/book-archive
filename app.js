@@ -82,7 +82,7 @@ searchButton.addEventListener('click', () => {
                 <div class="card h-100">
                     <img src="https://covers.openlibrary.org/b/id/${libarybook.cover_i}-M.jpg" class="card-img-top img-fluid" />
                     <div class="card-footer text-center">
-                        <h6 class="card-title">Book Title : ${libarybook.title}</h6>
+                        <h6 class="card-title"><b>Book Title :</b> ${libarybook.title}</h6>
                         <p><b>Author Name :</b> ${libarybook.author_name ? libarybook.author_name : ''} </p>
                         <p><b>First Published Date :</b> ${libarybook.first_publish_year ? libarybook.first_publish_year : ''} </p>
                         <p><b>Publisher :</b> ${libarybook.publisher ? libarybook.publisher : ''} </p>
